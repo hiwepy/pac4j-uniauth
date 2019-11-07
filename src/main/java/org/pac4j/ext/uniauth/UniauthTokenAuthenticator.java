@@ -23,7 +23,7 @@ import org.pac4j.core.util.CommonHelper;
  * TODO
  * @author 		： <a href="https://github.com/vindell">vindell</a>
  */
-public class UniauthTokenAuthenticator extends TokenAuthenticator<TokenCredentials, UniauthProfile, UniauthToken> {
+public class UniauthTokenAuthenticator extends TokenAuthenticator<TokenCredentials, UniauthTokenProfile, UniauthToken> {
 	
 	private String profileUrl;
 		
@@ -34,7 +34,7 @@ public class UniauthTokenAuthenticator extends TokenAuthenticator<TokenCredentia
 	@Override
     protected void internalInit() {
 		CommonHelper.assertNotNull("profileUrl", profileUrl);
-        defaultProfileDefinition(new UniauthProfileDefinition(profileUrl, x -> new UniauthProfile()));
+        defaultProfileDefinition(new UniauthTokenProfileDefinition(profileUrl, x -> new UniauthTokenProfile()));
         super.internalInit();
     }
     

@@ -15,9 +15,9 @@
  */
 package org.pac4j.ext.uniauth;
 
-import org.pac4j.core.ext.profile.TokenProfile;
+import org.pac4j.core.ext.profile.SignatureProfile;
 
-public class UniauthProfile extends TokenProfile {
+public class UniauthSignatureProfile extends SignatureProfile {
 
 	/**
 	 * 用户 id

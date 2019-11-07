@@ -15,9 +15,17 @@
  */
 package org.pac4j.ext.uniauth;
 
-import org.pac4j.core.credentials.TokenCredentials;
-import org.pac4j.core.ext.client.TokenClient;
+import org.pac4j.core.ext.profile.Signature;
 
-public class UniauthTokenClient extends TokenClient<TokenCredentials, UniauthTokenProfile, UniauthToken> {
+/**
+ * TODO
+ * @author 		： <a href="https://github.com/vindell">wandl</a>
+ */
+@SuppressWarnings("serial")
+public class UniauthSignature extends Signature {
+	
+	protected UniauthSignature(String rawResponse) {
+		super(rawResponse);
+	}
 
 }

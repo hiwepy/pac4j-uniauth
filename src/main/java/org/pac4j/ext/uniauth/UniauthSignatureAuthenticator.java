@@ -15,9 +15,19 @@
  */
 package org.pac4j.ext.uniauth;
 
-import org.pac4j.core.credentials.TokenCredentials;
-import org.pac4j.core.ext.client.TokenClient;
+import org.pac4j.core.ext.credentials.SignatureCredentials;
+import org.pac4j.core.ext.credentials.authenticator.SignatureAuthenticator;
 
-public class UniauthTokenClient extends TokenClient<TokenCredentials, UniauthTokenProfile, UniauthToken> {
-
+/**
+ * TODO
+ * @author 		： <a href="https://github.com/vindell">vindell</a>
+ */
+public class UniauthSignatureAuthenticator extends SignatureAuthenticator<SignatureCredentials, UniauthSignatureProfile, UniauthSignature> {
+	
+	@Override
+    protected void internalInit() {
+        defaultProfileDefinition(new UniauthSignatureProfileDefinition(x -> new UniauthSignatureProfile()));
+        super.internalInit();
+    }
+    
 }

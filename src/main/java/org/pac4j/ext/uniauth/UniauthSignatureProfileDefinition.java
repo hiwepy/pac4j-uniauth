@@ -18,50 +18,36 @@ package org.pac4j.ext.uniauth;
 import java.util.function.Function;
 
 import org.apache.commons.lang3.StringUtils;
-import org.pac4j.core.context.WebContext;
 import org.pac4j.core.exception.HttpCommunicationException;
 import org.pac4j.core.exception.TechnicalException;
-import org.pac4j.core.ext.profile.TokenProfileDefinition;
+import org.pac4j.core.ext.profile.SignatureProfileDefinition;
 
 import com.alibaba.fastjson.JSONObject;
 
 /**
- * Access Token profile definition.
+ * Access Signature profile definition.
  */
-public class UniauthProfileDefinition extends TokenProfileDefinition<UniauthProfile, UniauthToken> {
+public class UniauthSignatureProfileDefinition extends SignatureProfileDefinition<UniauthSignatureProfile, UniauthSignature> {
 	
-	protected final String profileUrl;
-	
-	public UniauthProfileDefinition(String profileUrl) {
+	public UniauthSignatureProfileDefinition() {
 		super();
-		this.profileUrl = profileUrl;
 	}
 
-    public UniauthProfileDefinition(String profileUrl, final Function<Object[], UniauthProfile> profileFactory) {
+    public UniauthSignatureProfileDefinition( final Function<Object[], UniauthSignatureProfile> profileFactory) {
         super(profileFactory);
-        this.profileUrl = profileUrl;
     }
     
-    
-    /**
-     * Retrieve the url of the profile of the authenticated user for the provider.
-     *
-     * @param accessToken only used when constructing dynamic urls from data in the token
-     * @return the url of the user profile given by the provider
-     */
-    public String getProfileUrl(WebContext context, UniauthToken accessToken) {
-    	return profileUrl;
-    }
-
-    /**
-     * Extract the user profile from the response (JSON, XML...) of the profile url.
-     *
-     * @param body the response body
-     * @return the returned profile
-     */
-    public UniauthProfile extractUserProfile(String body) {
-    	
-		JSONObject json = JSONObject.parseObject(body);
+	/**
+	 * TODO
+	 * @author 		：<a href="https://github.com/vindell">wandl</a>
+	 * @param payload
+	 * @param signature
+	 * @return
+	 */
+	
+	@Override
+	public UniauthSignatureProfile extractUserProfile(String payload, String signature) {
+		JSONObject json = JSONObject.parseObject(payload);
 		/*
 		{
 		    "msg": "系统证书校验失败，非法请求请,联系认证中心获得你的syskey!",
@@ -71,8 +57,8 @@ public class UniauthProfileDefinition extends TokenProfileDefinition<UniauthProf
 			throw new HttpCommunicationException(json.getString("msg"));
 		}
 		
-    	final UniauthProfile profileClass = this.newProfile();
-        final UniauthProfile profile;
+    	final UniauthSignatureProfile profileClass = this.newProfile();
+        final UniauthSignatureProfile profile;
         try {
             profile = JSONObject.parseObject(json.getString("pinfo"), profileClass.getClass());
         } catch (final Exception e) {
@@ -80,11 +66,6 @@ public class UniauthProfileDefinition extends TokenProfileDefinition<UniauthProf
         }
         logger.debug("profile: {}", profile);
     	return null;
-    }
-
-	@Override
-	public boolean matchProfile(WebContext context, UniauthToken accessToken) {
-		return false;
 	}
     
 }
