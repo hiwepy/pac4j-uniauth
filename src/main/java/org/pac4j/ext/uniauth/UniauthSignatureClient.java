@@ -29,15 +29,15 @@ public class UniauthSignatureClient extends SignatureClient<SignatureCredentials
 	public UniauthSignatureClient() {
 	}
 	
-	public UniauthSignatureClient(String paylodParameterName, String signatureParameterName,
+	public UniauthSignatureClient(String signatureParameterName,
 			SignatureAuthenticator<SignatureCredentials, UniauthSignatureProfile, UniauthSignature> tokenAuthenticator) {
-		super(paylodParameterName, signatureParameterName, tokenAuthenticator);
+		super( signatureParameterName, tokenAuthenticator);
 	}
 	
-	public UniauthSignatureClient(String paylodParameterName, String signatureParameterName,
+	public UniauthSignatureClient(String signatureParameterName,
 			SignatureAuthenticator<SignatureCredentials, UniauthSignatureProfile, UniauthSignature> tokenAuthenticator,
 			ProfileCreator<SignatureCredentials> profileCreator) {
-		super(paylodParameterName, signatureParameterName, tokenAuthenticator, profileCreator);
+		super( signatureParameterName, tokenAuthenticator, profileCreator);
 	}
 
 }

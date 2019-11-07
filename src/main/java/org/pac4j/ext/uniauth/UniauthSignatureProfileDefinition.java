@@ -17,8 +17,6 @@ package org.pac4j.ext.uniauth;
 
 import java.util.function.Function;
 
-import org.apache.commons.lang3.StringUtils;
-import org.pac4j.core.exception.HttpCommunicationException;
 import org.pac4j.core.exception.TechnicalException;
 import org.pac4j.core.ext.profile.SignatureProfileDefinition;
 
@@ -37,30 +35,12 @@ public class UniauthSignatureProfileDefinition extends SignatureProfileDefinitio
         super(profileFactory);
     }
     
-	/**
-	 * TODO
-	 * @author 		：<a href="https://github.com/vindell">wandl</a>
-	 * @param payload
-	 * @param signature
-	 * @return
-	 */
-	
 	@Override
 	public UniauthSignatureProfile extractUserProfile(String payload, String signature) {
-		JSONObject json = JSONObject.parseObject(payload);
-		/*
-		{
-		    "msg": "系统证书校验失败，非法请求请,联系认证中心获得你的syskey!",
-		    "status": "fail"
-		}*/
-		if(StringUtils.equalsIgnoreCase(json.getString("status"), "fail")) {
-			throw new HttpCommunicationException(json.getString("msg"));
-		}
-		
     	final UniauthSignatureProfile profileClass = this.newProfile();
         final UniauthSignatureProfile profile;
         try {
-            profile = JSONObject.parseObject(json.getString("pinfo"), profileClass.getClass());
+            profile = JSONObject.parseObject(payload, profileClass.getClass());
         } catch (final Exception e) {
             throw new TechnicalException(e);
         }
