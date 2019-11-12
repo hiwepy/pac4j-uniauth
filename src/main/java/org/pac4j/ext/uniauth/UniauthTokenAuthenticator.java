@@ -23,7 +23,7 @@ import org.pac4j.core.util.CommonHelper;
  * TODO
  * @author 		： <a href="https://github.com/vindell">vindell</a>
  */
-public class UniauthTokenAuthenticator extends TokenAuthenticator<TokenCredentials, UniauthTokenProfile, UniauthToken> {
+public class UniauthTokenAuthenticator extends TokenAuthenticator<UniauthTokenProfile, UniauthToken> {
 	
 	private String profileUrl;
 		

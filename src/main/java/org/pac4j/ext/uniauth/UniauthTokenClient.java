@@ -15,9 +15,8 @@
  */
 package org.pac4j.ext.uniauth;
 
-import org.pac4j.core.credentials.TokenCredentials;
 import org.pac4j.core.ext.client.TokenClient;
 
-public class UniauthTokenClient extends TokenClient<TokenCredentials, UniauthTokenProfile, UniauthToken> {
+public class UniauthTokenClient extends TokenClient<UniauthTokenProfile, UniauthToken> {
 
 }
