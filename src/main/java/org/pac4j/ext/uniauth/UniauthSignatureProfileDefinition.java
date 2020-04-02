@@ -15,10 +15,9 @@
  */
 package org.pac4j.ext.uniauth;
 
-import java.util.function.Function;
-
 import org.pac4j.core.exception.TechnicalException;
 import org.pac4j.core.ext.profile.SignatureProfileDefinition;
+import org.pac4j.core.profile.factory.ProfileFactory;
 
 import com.alibaba.fastjson.JSONObject;
 
@@ -31,7 +30,7 @@ public class UniauthSignatureProfileDefinition extends SignatureProfileDefinitio
 		super();
 	}
 
-    public UniauthSignatureProfileDefinition( final Function<Object[], UniauthSignatureProfile> profileFactory) {
+    public UniauthSignatureProfileDefinition( final ProfileFactory<UniauthSignatureProfile> profileFactory) {
         super(profileFactory);
     }
     

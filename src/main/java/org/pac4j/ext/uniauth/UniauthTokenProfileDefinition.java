@@ -15,13 +15,12 @@
  */
 package org.pac4j.ext.uniauth;
 
-import java.util.function.Function;
-
 import org.apache.commons.lang3.StringUtils;
 import org.pac4j.core.context.WebContext;
 import org.pac4j.core.exception.HttpCommunicationException;
 import org.pac4j.core.exception.TechnicalException;
 import org.pac4j.core.ext.profile.TokenProfileDefinition;
+import org.pac4j.core.profile.factory.ProfileFactory;
 
 import com.alibaba.fastjson.JSONObject;
 
@@ -37,7 +36,7 @@ public class UniauthTokenProfileDefinition extends TokenProfileDefinition<Uniaut
 		this.profileUrl = profileUrl;
 	}
 
-    public UniauthTokenProfileDefinition(String profileUrl, final Function<Object[], UniauthTokenProfile> profileFactory) {
+    public UniauthTokenProfileDefinition(String profileUrl, final ProfileFactory<UniauthTokenProfile> profileFactory) {
         super(profileFactory);
         this.profileUrl = profileUrl;
     }
