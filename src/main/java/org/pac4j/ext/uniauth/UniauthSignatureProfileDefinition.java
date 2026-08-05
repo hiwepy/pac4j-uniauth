@@ -39,7 +39,9 @@ public class UniauthSignatureProfileDefinition extends SignatureProfileDefinitio
     	final UniauthSignatureProfile profileClass = this.newProfile();
         final UniauthSignatureProfile profile;
         try {
-            profile = JSONObject.parseObject(payload, profileClass.getClass());
+            @SuppressWarnings("unchecked")
+            final UniauthSignatureProfile parsed = (UniauthSignatureProfile) JSONObject.parseObject(payload, profileClass.getClass());
+            profile = parsed;
         } catch (final Exception e) {
             throw new TechnicalException(e);
         }
