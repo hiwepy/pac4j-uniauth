@@ -75,7 +75,9 @@ public class UniauthTokenProfileDefinition extends TokenProfileDefinition<Uniaut
     	final UniauthTokenProfile profileClass = this.newProfile();
         final UniauthTokenProfile profile;
         try {
-            profile = JSONObject.parseObject(json.getString("pinfo"), profileClass.getClass());
+            @SuppressWarnings("unchecked")
+            final UniauthTokenProfile parsed = (UniauthTokenProfile) JSONObject.parseObject(json.getString("pinfo"), profileClass.getClass());
+            profile = parsed;
         } catch (final Exception e) {
             throw new TechnicalException(e);
         }
