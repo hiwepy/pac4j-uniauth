@@ -510,7 +510,7 @@
         <maven-surefire-plugin.version>3.5.2</maven-surefire-plugin.version>
         <maven-source-plugin.version>3.4.0</maven-source-plugin.version>
         <maven-nexus-staging-plugin.version>1.7.0</maven-nexus-staging-plugin.version>
-        <pac4j-biz.version>2.0.x.20260630-SNAPSHOT</pac4j-biz.version>
+        <easy4j-pac4j-biz.version>2.0.x.20260630-SNAPSHOT</easy4j-pac4j-biz.version>
     </properties>
 
     <!-- 依赖版本统一管理（dependencyManagement） -->
@@ -520,7 +520,7 @@
             <dependency>
                 <groupId>io.github.easy4j</groupId>
                 <artifactId>pac4j-biz</artifactId>
-                <version>${pac4j-biz.version}</version>
+                <version>${easy4j-pac4j-biz.version}</version>
             </dependency>
             <!-- For Lombok -->
             <dependency>
