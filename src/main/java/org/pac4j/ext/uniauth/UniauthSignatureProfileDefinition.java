@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2018, hiwepy (https://github.com/hiwepy).
+ * Copyright (c) 2018, Loong Wan (https://github.com/loong10k).
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -39,7 +39,9 @@ public class UniauthSignatureProfileDefinition extends SignatureProfileDefinitio
     	final UniauthSignatureProfile profileClass = this.newProfile();
         final UniauthSignatureProfile profile;
         try {
-            profile = JSONObject.parseObject(payload, profileClass.getClass());
+            @SuppressWarnings("unchecked")
+            final UniauthSignatureProfile parsed = (UniauthSignatureProfile) JSONObject.parseObject(payload, profileClass.getClass());
+            profile = parsed;
         } catch (final Exception e) {
             throw new TechnicalException(e);
         }
