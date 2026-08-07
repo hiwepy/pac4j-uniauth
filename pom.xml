@@ -511,17 +511,17 @@
         <maven-surefire-plugin.version>3.5.2</maven-surefire-plugin.version>
         <maven-source-plugin.version>3.4.0</maven-source-plugin.version>
         <maven-nexus-staging-plugin.version>1.7.0</maven-nexus-staging-plugin.version>
-        <easy4j-pac4j-biz.version>1.0.x.20260630-SNAPSHOT</easy4j-pac4j-biz.version>
+        <easy4j-pac4j-extension-core.version>1.0.x.20260630-SNAPSHOT</easy4j-pac4j-extension-core.version>
     </properties>
 
     <!-- 依赖版本统一管理（dependencyManagement） -->
     <dependencyManagement>
         <dependencies>
-            <!-- Source: https://github.com/easy-4-java/pac4j-biz — easy4j pac4j-biz -->
+            <!-- Source: https://github.com/easy-4-java/pac4j-extension — easy4j pac4j core extension -->
             <dependency>
                 <groupId>io.github.easy4j</groupId>
-                <artifactId>pac4j-biz</artifactId>
-                <version>${easy4j-pac4j-biz.version}</version>
+                <artifactId>pac4j-extension-core</artifactId>
+                <version>${easy4j-pac4j-extension-core.version}</version>
             </dependency>
             <!-- For Lombok -->
             <dependency>
@@ -541,10 +541,10 @@
 
     <!-- 项目依赖（dependencies） -->
     <dependencies>
-        <!-- Source: https://github.com/easy-4-java/pac4j-biz — easy4j pac4j-biz -->
+        <!-- Source: https://github.com/easy-4-java/pac4j-extension — easy4j pac4j core extension -->
         <dependency>
             <groupId>io.github.easy4j</groupId>
-            <artifactId>pac4j-biz</artifactId>
+            <artifactId>pac4j-extension-core</artifactId>
         </dependency>
         <!-- For Lombok -->
         <dependency>
