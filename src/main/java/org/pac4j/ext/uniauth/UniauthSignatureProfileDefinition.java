@@ -30,13 +30,13 @@ public class UniauthSignatureProfileDefinition extends SignatureProfileDefinitio
 		super();
 	}
 
-    public UniauthSignatureProfileDefinition( final ProfileFactory<UniauthSignatureProfile> profileFactory) {
+    public UniauthSignatureProfileDefinition(final ProfileFactory profileFactory) {
         super(profileFactory);
     }
     
 	@Override
 	public UniauthSignatureProfile extractUserProfile(String payload, String signature) {
-    	final UniauthSignatureProfile profileClass = this.newProfile();
+		final UniauthSignatureProfile profileClass = (UniauthSignatureProfile) this.newProfile();
         final UniauthSignatureProfile profile;
         try {
             @SuppressWarnings("unchecked")
@@ -46,7 +46,7 @@ public class UniauthSignatureProfileDefinition extends SignatureProfileDefinitio
             throw new TechnicalException(e);
         }
         logger.debug("profile: {}", profile);
-    	return null;
+	return profile;
 	}
     
 }

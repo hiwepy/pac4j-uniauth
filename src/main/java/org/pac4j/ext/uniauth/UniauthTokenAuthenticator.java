@@ -32,10 +32,10 @@ public class UniauthTokenAuthenticator extends TokenAuthenticator<UniauthTokenPr
 	}
 	
 	@Override
-    protected void internalInit() {
+    protected void internalInit(boolean forceReinit) {
 		CommonHelper.assertNotNull("profileUrl", profileUrl);
         defaultProfileDefinition(new UniauthTokenProfileDefinition(profileUrl, x -> new UniauthTokenProfile()));
-        super.internalInit();
+        super.internalInit(forceReinit);
     }
     
 	public String getProfileUrl() {
