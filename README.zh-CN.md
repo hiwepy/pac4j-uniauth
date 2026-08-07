@@ -4,6 +4,8 @@
 
 [![Java](https://img.shields.io/badge/Java-21-orange)](https://github.com/easy-4-java/pac4j-uniauth) [![License](https://img.shields.io/badge/license-Apache%202.0-green)](./LICENSE)
 
+pac4j-uniauth 是 pac4j 5.0.x 的扩展组件，用于将校园统一身份认证中心（Uniauth）接入 pac4j 安全流程。
+
 ## 目录
 
 - [1. 项目概述](#1-项目概述)
