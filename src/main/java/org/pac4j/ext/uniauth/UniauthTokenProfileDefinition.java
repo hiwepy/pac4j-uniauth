@@ -36,7 +36,7 @@ public class UniauthTokenProfileDefinition extends TokenProfileDefinition<Uniaut
 		this.profileUrl = profileUrl;
 	}
 
-    public UniauthTokenProfileDefinition(String profileUrl, final ProfileFactory<UniauthTokenProfile> profileFactory) {
+    public UniauthTokenProfileDefinition(String profileUrl, final ProfileFactory profileFactory) {
         super(profileFactory);
         this.profileUrl = profileUrl;
     }
@@ -72,7 +72,7 @@ public class UniauthTokenProfileDefinition extends TokenProfileDefinition<Uniaut
 			throw new HttpCommunicationException(json.getString("msg"));
 		}
 		
-    	final UniauthTokenProfile profileClass = this.newProfile();
+        final UniauthTokenProfile profileClass = (UniauthTokenProfile) this.newProfile();
         final UniauthTokenProfile profile;
         try {
             @SuppressWarnings("unchecked")

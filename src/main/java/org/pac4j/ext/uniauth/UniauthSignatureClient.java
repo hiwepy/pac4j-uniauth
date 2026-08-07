@@ -36,7 +36,7 @@ public class UniauthSignatureClient extends SignatureClient<SignatureCredentials
 	
 	public UniauthSignatureClient(String signatureParameterName,
 			SignatureAuthenticator<SignatureCredentials, UniauthSignatureProfile, UniauthSignature> tokenAuthenticator,
-			ProfileCreator<SignatureCredentials> profileCreator) {
+			ProfileCreator profileCreator) {
 		super( signatureParameterName, tokenAuthenticator, profileCreator);
 	}
 

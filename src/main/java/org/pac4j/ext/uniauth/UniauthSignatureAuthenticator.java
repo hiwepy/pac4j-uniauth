@@ -25,9 +25,9 @@ import org.pac4j.core.ext.credentials.authenticator.SignatureAuthenticator;
 public class UniauthSignatureAuthenticator extends SignatureAuthenticator<SignatureCredentials, UniauthSignatureProfile, UniauthSignature> {
 	
 	@Override
-    protected void internalInit() {
+    protected void internalInit(boolean forceReinit) {
         defaultProfileDefinition(new UniauthSignatureProfileDefinition(x -> new UniauthSignatureProfile()));
-        super.internalInit();
+        super.internalInit(forceReinit);
     }
     
 }
