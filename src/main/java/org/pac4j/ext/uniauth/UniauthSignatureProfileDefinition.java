@@ -36,7 +36,7 @@ import com.alibaba.fastjson.JSONObject;
  * reflective use, and one accepting a {@link ProfileFactory} for advanced
  * scenarios where profile instances are produced by a factory.</p>
  *
- * @author Loong Wan
+ * @author [@Loong Wan](https://github.com/loong10k)
  * @since 3.0.0
  * @see SignatureProfileDefinition
  * @see UniauthSignatureProfile

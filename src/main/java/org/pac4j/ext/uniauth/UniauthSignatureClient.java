@@ -31,7 +31,7 @@ import org.pac4j.core.profile.creator.ProfileCreator;
  * constructors are provided so callers can opt-in to a custom parameter name,
  * a custom authenticator, and/or a custom {@link ProfileCreator}.</p>
  *
- * @author Loong Wan
+ * @author [@Loong Wan](https://github.com/loong10k)
  * @since 3.0.0
  * @see SignatureClient
  * @see UniauthSignatureAuthenticator

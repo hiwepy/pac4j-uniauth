@@ -32,7 +32,7 @@ import org.pac4j.core.ext.credentials.authenticator.SignatureAuthenticator;
  * no external configuration is required for typical deployments because all
  * defaults are inferred from the Uniauth endpoint contract.</p>
  *
- * @author Loong Wan
+ * @author [@Loong Wan](https://github.com/loong10k)
  * @since 3.0.0
  * @see SignatureAuthenticator
  * @see UniauthSignatureProfileDefinition

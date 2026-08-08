@@ -33,7 +33,7 @@ import org.pac4j.core.util.CommonHelper;
  * <p>The profile endpoint URL is captured at construction time; the
  * authenticator refuses to initialise when the URL is {@code null}.</p>
  *
- * @author Loong Wan
+ * @author [@Loong Wan](https://github.com/loong10k)
  * @since 3.0.0
  * @see TokenAuthenticator
  * @see UniauthTokenProfileDefinition
