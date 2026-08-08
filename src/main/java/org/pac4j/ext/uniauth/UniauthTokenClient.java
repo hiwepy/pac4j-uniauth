@@ -17,6 +17,24 @@ package org.pac4j.ext.uniauth;
 
 import org.pac4j.core.ext.client.TokenClient;
 
+/**
+ * pac4j direct client that authenticates HTTP requests carrying a Uniauth
+ * bearer-token parameter.
+ *
+ * <p>The client extracts a token value from the incoming HTTP request (using
+ * the framework-default token parameter name), delegates credential validation
+ * to an {@link UniauthTokenAuthenticator}, and produces an
+ * {@link UniauthTokenProfile} once validation succeeds. This class does not
+ * add behaviour on top of the generic {@link TokenClient} &mdash; it merely
+ * binds the type parameters so consumers can refer to a Uniauth-specific
+ * client.</p>
+ *
+ * @author [@Loong Wan](https://github.com/loong10k)
+ * @since 3.0.0
+ * @see TokenClient
+ * @see UniauthTokenAuthenticator
+ * @see UniauthTokenProfile
+ */
 public class UniauthTokenClient extends TokenClient<UniauthTokenProfile, UniauthToken> {
 
 }

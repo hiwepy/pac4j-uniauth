@@ -19,15 +19,40 @@ import org.pac4j.core.ext.credentials.SignatureCredentials;
 import org.pac4j.core.ext.credentials.authenticator.SignatureAuthenticator;
 
 /**
- * TODO
+ * Authenticator that validates Uniauth signature credentials.
+ *
+ * <p>The authenticator plugs into the pac4j <em>direct client</em> machinery
+ * &mdash; it is invoked when an HTTP request carries a signature parameter
+ * (see {@link org.pac4j.core.ext.credentials.extractor.SignatureParameterExtractor}).
+ * It builds an {@link UniauthSignatureProfile} from the parsed
+ * {@link SignatureCredentials} by delegating to an
+ * {@link UniauthSignatureProfileDefinition}.</p>
+ *
+ * <p>The authenticator is fully wired by overriding {@link #internalInit(boolean)};
+ * no external configuration is required for typical deployments because all
+ * defaults are inferred from the Uniauth endpoint contract.</p>
+ *
  * @author [@Loong Wan](https://github.com/loong10k)
+ * @since 3.0.0
+ * @see SignatureAuthenticator
+ * @see UniauthSignatureProfileDefinition
+ * @see UniauthSignature
  */
 public class UniauthSignatureAuthenticator extends SignatureAuthenticator<SignatureCredentials, UniauthSignatureProfile, UniauthSignature> {
-	
-	@Override
-    protected void internalInit() {
+
+    /**
+     * Initialises the authenticator and registers the
+     * {@link UniauthSignatureProfileDefinition} that converts raw JSON
+     * payloads into {@link UniauthSignatureProfile} instances.
+     *
+     * @param forceReinit when {@code true}, forces re-initialisation even
+     *                    if the component was already initialised &mdash;
+     *                    used internally by pac4j's component lifecycle
+     */
+    @Override
+    protected void internalInit(boolean forceReinit) {
         defaultProfileDefinition(new UniauthSignatureProfileDefinition(x -> new UniauthSignatureProfile()));
-        super.internalInit();
+        super.internalInit(forceReinit);
     }
-    
+
 }

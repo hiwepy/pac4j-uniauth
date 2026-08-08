@@ -25,54 +25,111 @@ import org.pac4j.core.profile.factory.ProfileFactory;
 import com.alibaba.fastjson.JSONObject;
 
 /**
- * Access Token profile definition.
+ * Profile definition used to convert Uniauth REST responses into
+ * {@link UniauthTokenProfile} instances.
+ *
+ * <p>The definition interprets the JSON envelope returned by the Uniauth
+ * profile endpoint:</p>
+ * <ul>
+ *     <li>{@code status = "fail"} &mdash; the {@code msg} field is wrapped in
+ *         a {@link HttpCommunicationException} and the auth flow fails fast.</li>
+ *     <li>{@code status = "success"} &mdash; the {@code pinfo} field is parsed
+ *         as a {@link UniauthTokenProfile}. Any deserialisation failure is
+ *         wrapped in a {@link TechnicalException}.</li>
+ * </ul>
+ *
+ * <p>The {@link #profileUrl} is captured at construction time and exposed via
+ * {@link #getProfileUrl(WebContext, UniauthToken)}; the {@code accessToken}
+ * argument is not used because the URL is static for the lifetime of this
+ * definition.</p>
+ *
+ * @author [@Loong Wan](https://github.com/loong10k)
+ * @since 3.0.0
+ * @see TokenProfileDefinition
+ * @see UniauthTokenProfile
+ * @see UniauthToken
  */
 public class UniauthTokenProfileDefinition extends TokenProfileDefinition<UniauthTokenProfile, UniauthToken> {
-	
-	protected final String profileUrl;
-	
-	public UniauthTokenProfileDefinition(String profileUrl) {
-		super();
-		this.profileUrl = profileUrl;
-	}
 
-    public UniauthTokenProfileDefinition(String profileUrl, final ProfileFactory<UniauthTokenProfile> profileFactory) {
+    /**
+     * The Uniauth endpoint URL used to look up the profile of the
+     * currently authenticated user. Populated at construction time and
+     * never mutated afterwards.
+     */
+    protected final String profileUrl;
+
+    /**
+     * Creates a new definition that points at the supplied profile URL.
+     *
+     * @param profileUrl the Uniauth endpoint that returns the profile JSON
+     *                   document, never {@code null}
+     */
+    public UniauthTokenProfileDefinition(String profileUrl) {
+        super();
+        this.profileUrl = profileUrl;
+    }
+
+    /**
+     * Creates a new definition that points at the supplied profile URL and
+     * uses the supplied factory to materialise profile instances.
+     *
+     * @param profileUrl    the Uniauth endpoint that returns the profile JSON
+     *                      document, never {@code null}
+     * @param profileFactory the factory used to produce
+     *                        {@link UniauthTokenProfile} instances, never
+     *                        {@code null}
+     */
+    public UniauthTokenProfileDefinition(String profileUrl, final ProfileFactory profileFactory) {
         super(profileFactory);
         this.profileUrl = profileUrl;
     }
-    
-    
+
     /**
-     * Retrieve the url of the profile of the authenticated user for the provider.
+     * Retrieves the static profile URL &mdash; the {@code accessToken} is
+     * ignored because the Uniauth endpoint does not vary its URL based on
+     * the supplied token.
      *
-     * @param accessToken only used when constructing dynamic urls from data in the token
-     * @return the url of the user profile given by the provider
+     * @param context     the current web context, never {@code null}
+     * @param accessToken the Uniauth access token (ignored)
+     * @return the profile URL passed to the constructor, never {@code null}
      */
     @Override
     public String getProfileUrl(WebContext context, UniauthToken accessToken) {
-    	return profileUrl;
+        return profileUrl;
     }
 
     /**
-     * Extract the user profile from the response (JSON, XML...) of the profile url.
+     * Extracts a Uniauth token profile from the JSON body returned by the
+     * Uniauth profile endpoint.
      *
-     * @param body the response body
-     * @return the returned profile
+     * <p>If the body reports a failure (status {@code "fail"}), an
+     * {@link HttpCommunicationException} carrying the supplied message is
+     * thrown. Otherwise the {@code pinfo} sub-object is parsed into a
+     * {@link UniauthTokenProfile}; any deserialisation error is wrapped in
+     * a {@link TechnicalException}.</p>
+     *
+     * @param body the JSON body returned by the profile endpoint, never
+     *             {@code null}
+     * @return a {@link UniauthTokenProfile} populated from {@code pinfo},
+     *         never {@code null}
+     * @throws HttpCommunicationException if the body reports a failed status
+     * @throws TechnicalException         if {@code pinfo} cannot be
+     *                                    deserialised
      */
     @Override
     public UniauthTokenProfile extractUserProfile(String body) {
-    	
-		JSONObject json = JSONObject.parseObject(body);
-		/*
-		{
-		    "msg": "系统证书校验失败，非法请求请,联系认证中心获得你的syskey!",
-		    "status": "fail"
-		}*/
-		if(StringUtils.equalsIgnoreCase(json.getString("status"), "fail")) {
-			throw new HttpCommunicationException(json.getString("msg"));
-		}
-		
-    	final UniauthTokenProfile profileClass = this.newProfile();
+
+        JSONObject json = JSONObject.parseObject(body);
+        /*
+        {
+            "msg": "系统证书校验失败，非法请求请,联系认证中心获得你的syskey!",
+            "status": "fail"
+        }*/
+        if(StringUtils.equalsIgnoreCase(json.getString("status"), "fail")) {
+            throw new HttpCommunicationException(json.getString("msg"));
+        }
+
+        final UniauthTokenProfile profileClass = (UniauthTokenProfile) this.newProfile();
         final UniauthTokenProfile profile;
         try {
             @SuppressWarnings("unchecked")
@@ -82,7 +139,7 @@ public class UniauthTokenProfileDefinition extends TokenProfileDefinition<Uniaut
             throw new TechnicalException(e);
         }
         logger.debug("profile: {}", profile);
-    	return profile;
+        return profile;
     }
-    
+
 }
