@@ -17,11 +17,38 @@ package org.pac4j.ext.uniauth;
 
 import org.pac4j.core.ext.profile.Token;
 
+/**
+ * Uniauth access token wrapper.
+ *
+ * <p>This class is a thin, type-safe specialization of the framework-neutral
+ * {@link Token} class. It encapsulates an opaque bearer token issued by the
+ * Uniauth authentication service. Callers obtain the wrapped raw value via
+ * the inherited {@link Token#getRawResponse()} method and individual token
+ * parameters via {@link Token#getParameter(String)}.</p>
+ *
+ * <p>The protected constructor enforces that instances can only be created
+ * inside this package &mdash; typically by
+ * {@link UniauthTokenAuthenticator#getAccessToken(org.pac4j.core.credentials.TokenCredentials)}
+ * after a credential has been parsed from the HTTP request.</p>
+ *
+ * @author [@Loong Wan](https://github.com/loong10k)
+ * @since 3.0.0
+ * @see Token
+ * @see UniauthTokenAuthenticator
+ */
 @SuppressWarnings("serial")
 public class UniauthToken extends Token {
 
-	protected UniauthToken(String rawResponse) {
-		super(rawResponse);
-	}
-	
+    /**
+     * Package-private constructor used by
+     * {@link UniauthTokenAuthenticator#getAccessToken(org.pac4j.core.credentials.TokenCredentials)}
+     * when materialising a token object from a parsed HTTP parameter.
+     *
+     * @param rawResponse the raw bearer-token value as received from the
+     *                    Uniauth endpoint, never {@code null}
+     */
+    protected UniauthToken(String rawResponse) {
+        super(rawResponse);
+    }
+
 }
