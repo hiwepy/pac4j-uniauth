@@ -17,89 +17,182 @@ package org.pac4j.ext.uniauth;
 
 import org.pac4j.core.ext.profile.TokenProfile;
 
+/**
+ * Profile populated from a Uniauth token-credential response.
+ *
+ * <p>Each instance mirrors the attributes exposed by the Uniauth single
+ * sign-on backend &mdash; notably the campus-wide {@code pid} (unified
+ * person identifier), the per-system {@code userid}, the display name
+ * {@code xm}, the person type ({@code ptype}), the date of birth
+ * ({@code csrq}) and the credential initialisation flag ({@code flag}).
+ * The {@link #getId()} method returns the {@code pid}, which is the
+ * canonical identifier for Uniauth subjects.</p>
+ *
+ * <p>The class is structurally identical to
+ * {@link UniauthSignatureProfile}; the two are kept separate to preserve
+ * type-binding symmetry with the signature/token authenticator pair.</p>
+ *
+ * @author Loong Wan
+ * @since 3.0.0
+ * @see TokenProfile
+ * @see UniauthToken
+ */
 public class UniauthTokenProfile extends TokenProfile {
 
-	/**
-	 * 用户 id
-	 */
-	private String userid;
+    /**
+     * Per-system user id (login name) &mdash; unique within a single Uniauth
+     * realm but not across realms.
+     */
+    private String userid;
 
-	/**
-	 * 统一的人员编号
-	 */
-	private String pid;
+    /**
+     * Unified person identifier shared across the Uniauth federation.
+     * Used as the canonical profile id (see {@link #getId()}).
+     */
+    private String pid;
 
-	/**
-	 * 姓名
-	 */
-	private String xm;
+    /**
+     * Display name of the authenticated person (Pinyin: <em>x&iacute;ngm&iacute;ng</em>).
+     */
+    private String xm;
 
-	/**
-	 * 人员类型：学生／教工
-	 */
-	private String ptype;
+    /**
+     * Person type discriminator; one of {@code "student"} or {@code "staff"}.
+     */
+    private String ptype;
 
-	/**
-	 * 出生日期
-	 */
-	private String csrq;
+    /**
+     * Date of birth in the Uniauth canonical format
+     * ({@code yyyy-MM-dd}, Pinyin: <em>ch&#601;nsh&#601;ng r&igrave;</em>).
+     */
+    private String csrq;
 
-	/**
-	 * 0 未初始化密码 1 已初始化密码
-	 */
-	private String flag;
+    /**
+     * Password initialisation flag &mdash;
+     * {@code "0"} when the credential has never been initialised,
+     * {@code "1"} after the user has set a password.
+     */
+    private String flag;
 
-	@Override
-	public String getId() {
-		return pid;
-	}
+    /**
+     * Returns the canonical profile identifier.
+     *
+     * @return the value of {@link #pid}, or {@code null} when not populated
+     */
+    @Override
+    public String getId() {
+        return pid;
+    }
 
-	public String getUserid() {
-		return userid;
-	}
+    /**
+     * Returns the per-system user id.
+     *
+     * @return the userid field, may be {@code null}
+     */
+    public String getUserid() {
+        return userid;
+    }
 
-	public void setUserid(String userid) {
-		this.userid = userid;
-	}
+    /**
+     * Sets the per-system user id.
+     *
+     * @param userid the new user id, may be {@code null}
+     */
+    public void setUserid(String userid) {
+        this.userid = userid;
+    }
 
-	public String getPid() {
-		return pid;
-	}
+    /**
+     * Returns the unified person identifier.
+     *
+     * @return the pid field, may be {@code null}
+     */
+    public String getPid() {
+        return pid;
+    }
 
-	public void setPid(String pid) {
-		this.pid = pid;
-	}
+    /**
+     * Sets the unified person identifier. This also becomes the value
+     * returned by {@link #getId()}.
+     *
+     * @param pid the new pid, may be {@code null}
+     */
+    public void setPid(String pid) {
+        this.pid = pid;
+    }
 
-	public String getXm() {
-		return xm;
-	}
+    /**
+     * Returns the display name.
+     *
+     * @return the xm field, may be {@code null}
+     */
+    public String getXm() {
+        return xm;
+    }
 
-	public void setXm(String xm) {
-		this.xm = xm;
-	}
+    /**
+     * Sets the display name.
+     *
+     * @param xm the new display name, may be {@code null}
+     */
+    public void setXm(String xm) {
+        this.xm = xm;
+    }
 
-	public String getPtype() {
-		return ptype;
-	}
+    /**
+     * Returns the person type.
+     *
+     * @return the ptype field ({@code "student"} / {@code "staff"}), may be
+     *         {@code null}
+     */
+    public String getPtype() {
+        return ptype;
+    }
 
-	public void setPtype(String ptype) {
-		this.ptype = ptype;
-	}
+    /**
+     * Sets the person type.
+     *
+     * @param ptype the new person type, may be {@code null}
+     */
+    public void setPtype(String ptype) {
+        this.ptype = ptype;
+    }
 
-	public String getCsrq() {
-		return csrq;
-	}
+    /**
+     * Returns the date of birth string.
+     *
+     * @return the csrq field, may be {@code null}
+     */
+    public String getCsrq() {
+        return csrq;
+    }
 
-	public void setCsrq(String csrq) {
-		this.csrq = csrq;
-	}
+    /**
+     * Sets the date of birth string.
+     *
+     * @param csrq the new date of birth, may be {@code null}
+     */
+    public void setCsrq(String csrq) {
+        this.csrq = csrq;
+    }
 
-	public String getFlag() {
-		return flag;
-	}
+    /**
+     * Returns the password-initialisation flag.
+     *
+     * @return the flag field, typically {@code "0"} or {@code "1"}, may be
+     *         {@code null}
+     */
+    public String getFlag() {
+        return flag;
+    }
 
-	public void setFlag(String flag) {
-		this.flag = flag;
-	}
+    /**
+     * Sets the password-initialisation flag.
+     *
+     * @param flag the new flag value, may be {@code null}
+     */
+    public void setFlag(String flag) {
+        this.flag = flag;
+    }
 
 }
