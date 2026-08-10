@@ -31,7 +31,7 @@ import org.pac4j.core.ext.profile.Signature;
  * the wrapped raw response via the inherited {@link Signature#getRawResponse()}
  * method and individual parameters via {@link Signature#getParameter(String)}.</p>
  *
- * @author [@Loong Wan](https://github.com/loong10k)
+ * @author <a href="https://github.com/loong10k">Loong Wan</a>
  * @since 3.0.0
  * @see Signature
  * @see UniauthSignatureAuthenticator

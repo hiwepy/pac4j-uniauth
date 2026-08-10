@@ -32,7 +32,7 @@ import org.pac4j.core.ext.profile.TokenProfile;
  * {@link UniauthSignatureProfile}; the two are kept separate to preserve
  * type-binding symmetry with the signature/token authenticator pair.</p>
  *
- * @author [@Loong Wan](https://github.com/loong10k)
+ * @author <a href="https://github.com/loong10k">Loong Wan</a>
  * @since 3.0.0
  * @see TokenProfile
  * @see UniauthToken

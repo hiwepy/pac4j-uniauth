@@ -43,7 +43,7 @@ import com.alibaba.fastjson.JSONObject;
  * argument is not used because the URL is static for the lifetime of this
  * definition.</p>
  *
- * @author [@Loong Wan](https://github.com/loong10k)
+ * @author <a href="https://github.com/loong10k">Loong Wan</a>
  * @since 3.0.0
  * @see TokenProfileDefinition
  * @see UniauthTokenProfile

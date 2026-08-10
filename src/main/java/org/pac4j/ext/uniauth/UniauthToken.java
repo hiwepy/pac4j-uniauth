@@ -31,7 +31,7 @@ import org.pac4j.core.ext.profile.Token;
  * {@link UniauthTokenAuthenticator#getAccessToken(org.pac4j.core.credentials.TokenCredentials)}
  * after a credential has been parsed from the HTTP request.</p>
  *
- * @author [@Loong Wan](https://github.com/loong10k)
+ * @author <a href="https://github.com/loong10k">Loong Wan</a>
  * @since 3.0.0
  * @see Token
  * @see UniauthTokenAuthenticator

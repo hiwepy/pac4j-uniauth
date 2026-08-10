@@ -29,7 +29,7 @@ import org.pac4j.core.ext.client.TokenClient;
  * binds the type parameters so consumers can refer to a Uniauth-specific
  * client.</p>
  *
- * @author [@Loong Wan](https://github.com/loong10k)
+ * @author <a href="https://github.com/loong10k">Loong Wan</a>
  * @since 3.0.0
  * @see TokenClient
  * @see UniauthTokenAuthenticator

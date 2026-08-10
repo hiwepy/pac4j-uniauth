@@ -32,7 +32,7 @@ import org.pac4j.core.ext.profile.SignatureProfile;
  * corresponding field, and {@code toString()} is inherited from
  * {@link org.pac4j.core.profile.CommonProfile}.</p>
  *
- * @author [@Loong Wan](https://github.com/loong10k)
+ * @author <a href="https://github.com/loong10k">Loong Wan</a>
  * @since 3.0.0
  * @see SignatureProfile
  * @see UniauthSignature
