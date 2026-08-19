@@ -351,6 +351,7 @@
         <!-- Maven Plugin versions -->
         <maven-central-publishing-plugin.version>0.11.0</maven-central-publishing-plugin.version>
         <maven-jacoco-plugin.version>0.8.15</maven-jacoco-plugin.version>
+    
     </properties>
 
         </profile>
@@ -515,6 +516,7 @@
         <lombok.version>1.18.46</lombok.version>
         <maven-jacoco-plugin.version>0.8.15</maven-jacoco-plugin.version>
         <slf4j.version>2.0.18</slf4j.version>
+    
     </properties>
 
 
